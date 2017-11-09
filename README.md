@@ -30,10 +30,10 @@ Wikipedia los describe como
 ⚠️ ¡Cuidado!
 -----------------
 - Los patrones de diseño no son la panacea para todos los problemas.
-- No hay que intentar forzarlos; Es posible que sucendan cosas inesperadas si se fuerzan. Hay que tener en cuenta que los patrones de diseño son soluciones ** a ** problemas, no soluciones ** para encontrar problemas **; así que, no pienses demasiado.
+- No hay que intentar forzarlos; Es posible que sucendan cosas inesperadas si se fuerzan. Hay que tener en cuenta que los patrones de diseño son soluciones **a** problemas, no soluciones **para encontrar problemas**; así que, no pienses demasiado.
 - Si se usan en el lugar correcto y de manera correcta, pueden demostrar ser una gran ventaja; o, de lo contrario, pueden dar lugar a un lío horrible en el código fuente.
 
-> También hay que tener en cuenta que los ejemplos del código están en PHP 7, sin embargo, esto no debería ser un condicionante porque los conceptos son los mismos de todos modos. Además, ** está en curso el soporte para otros lenguajes **.
+> También hay que tener en cuenta que los ejemplos del código están en PHP 7, sin embargo, esto no debería ser un condicionante porque los conceptos son los mismos de todos modos. Además, **está en curso el soporte para otros lenguajes**.
 
 Tipos de Patrones de Diseño
 -----------------
@@ -101,7 +101,7 @@ class WoodenDoor implements Door
     }
 }
 ```
-Then we have our door factory that makes the door and returns it
+Entonces tenemos nuestra fábrica de puertas que hace la puerta y la devuelve
 ```php
 class DoorFactory
 {
@@ -111,32 +111,32 @@ class DoorFactory
     }
 }
 ```
-And then it can be used as
+Y luego puede usarse como
 ```php
 $door = DoorFactory::makeDoor(100, 200);
 echo 'Width: ' . $door->getWidth();
 echo 'Height: ' . $door->getHeight();
 ```
 
-**When to Use?**
+**¿Cuándo usarlo?**
 
-When creating an object is not just a few assignments and involves some logic, it makes sense to put it in a dedicated factory instead of repeating the same code everywhere.
+Cuando la creación de un objeto no es simplemente asignar e implica algo de lógica, tiene sentido colocarlo en una fábrica dedicada en lugar de repetir el mismo código en todas partes.
 
 🏭 Factory Method
---------------
+-----------------
 
-Real world example
-> Consider the case of a hiring manager. It is impossible for one person to interview for each of the positions. Based on the job opening, she has to decide and delegate the interview steps to different people.
+Ejemplo del mundo real
+> Considere el caso de un gerente de recursos humanos. Es imposible que una persona entreviste para cada una de las posiciones. Según la vacante, debe decidir y delegar los pasos de la entrevista a diferentes personas.
 
-In plain words
-> It provides a way to delegate the instantiation logic to child classes.
+De forma sencilla
+> Proporciona una forma de delegar la lógica de creación de instancias a clases secundarias.
 
-Wikipedia says
-> In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creating objects by calling a factory method—either specified in an interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
+Wikipedia dice
+> En la programación basada en clases, el patrón Factory Method es un patrón creacional que usa métodos de fábrica para tratar el problema de crear objetos sin tener que especificar la clase exacta del objeto que se creará. Esto se hace creando objetos llamando a un método de la fábrica, ya sea especificado en una interfaz e implementado por clases secundarias, o implementado en una clase base y opcionalmente anulado por clases derivadas, en lugar de llamar a un constructor.
 
  **Código de ejemplo**
 
-Taking our hiring manager example above. First of all we have an interviewer interface and some implementations for it
+Tomando nuestro ejemplo de gerente de contratación anterior. En primer lugar, tenemos una interfaz de entrevistador y algunas implementaciones para ella
 
 ```php
 interface Interviewer
@@ -178,7 +178,7 @@ abstract class HiringManager
 }
 
 ```
-Now any child can extend it and provide the required interviewer
+Ahora cualquier niño puede extenderlo y proporcionar el entrevistador requerido
 ```php
 class DevelopmentManager extends HiringManager
 {
@@ -196,8 +196,7 @@ class MarketingManager extends HiringManager
     }
 }
 ```
-and then it can be used as
-
+y luego puede usarse como
 ```php
 $devManager = new DevelopmentManager();
 $devManager->takeInterview(); // Output: Asking about design patterns
@@ -206,25 +205,25 @@ $marketingManager = new MarketingManager();
 $marketingManager->takeInterview(); // Output: Asking about community building.
 ```
 
-**When to use?**
+**¿Cuándo usarlo?**
 
-Useful when there is some generic processing in a class but the required sub-class is dynamically decided at runtime. Or putting it in other words, when the client doesn't know what exact sub-class it might need.
+Útil cuando hay algún procesamiento genérico en una clase pero la subclase requerida se decide dinámicamente en tiempo de ejecución. O poniéndolo en otras palabras, cuando el cliente no sabe qué subclase exacta podría necesitar.
 
 🔨 Abstract Factory
-----------------
+-------------------
 
-Real world example
-> Extending our door example from Simple Factory. Based on your needs you might get a wooden door from a wooden door shop, iron door from an iron shop or a PVC door from the relevant shop. Plus you might need a guy with different kind of specialities to fit the door, for example a carpenter for wooden door, welder for iron door etc. As you can see there is a dependency between the doors now, wooden door needs carpenter, iron door needs a welder etc.
+Ejemplo del mundo real
+> Vamos a extender nuestro ejemplo de las puertas desde el patrón Simple Factory. Según sus necesidades, puede obtener una puerta de madera de una tienda de puertas de madera, una puerta de hierro de una tienda de hierro o una puerta de PVC de la tienda correspondiente. Además, puede necesitar un profesional con diferentes tipos de especialidades para encajar en la puerta, por ejemplo, un carpintero para puerta de madera, un soldador para puerta de hierro, etc. Como puede ver, ahora hay una dependencia entre las puertas, la puerta de madera necesita carpintero, la puerta de hierro necesita un soldador, etc.
 
-In plain words
-> A factory of factories; a factory that groups the individual but related/dependent factories together without specifying their concrete classes.
+De forma sencilla
+> Una fábrica de fábricas; una fábrica que agrupa a las fábricas individuales pero relacionadas / dependientes juntas sin especificar sus clases concretas.
 
-Wikipedia says
-> The abstract factory pattern provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes
+Wikipedia dice
+> El patrón abstracto de fábrica proporciona una manera de encapsular un grupo de fábricas individuales que tienen un tema común sin especificar sus clases concretas.
 
 **Código de ejemplo**
 
-Translating the door example above. First of all we have our `Door` interface and some implementation for it
+Traduciendo el ejemplo de la puerta de arriba. En primer lugar, tenemos nuestra interfaz `Door` y alguna implementación para ello
 
 ```php
 interface Door
@@ -248,8 +247,7 @@ class IronDoor implements Door
     }
 }
 ```
-Then we have some fitting experts for each door type
-
+Luego tenemos algunos expertos en adaptación para cada tipo de puerta
 ```php
 interface DoorFittingExpert
 {
@@ -273,7 +271,7 @@ class Carpenter implements DoorFittingExpert
 }
 ```
 
-Now we have our abstract factory that would let us make family of related objects i.e. wooden door factory would create a wooden door and wooden door fitting expert and iron door factory would create an iron door and iron door fitting expert
+Ahora tenemos nuestra fábrica abstracta que nos permitiría hacer una familia de objetos relacionados, es decir, una fábrica de puertas de madera crearía una puerta de madera y un experto en accesorios de puertas de madera y una fábrica de puertas de hierro crearía una puerta de hierro y un experto en herrajes para puertas
 ```php
 interface DoorFactory
 {
@@ -309,7 +307,7 @@ class IronDoorFactory implements DoorFactory
     }
 }
 ```
-And then it can be used as
+Y luego puede usarse como
 ```php
 $woodenFactory = new WoodenDoorFactory();
 
@@ -329,24 +327,22 @@ $door->getDescription();  // Output: I am an iron door
 $expert->getDescription(); // Output: I can only fit iron doors
 ```
 
-As you can see the wooden door factory has encapsulated the `carpenter` and the `wooden door` also iron door factory has encapsulated the `iron door` and `welder`. And thus it had helped us make sure that for each of the created door, we do not get a wrong fitting expert.   
+Como se puede ver, la fábrica de puertas de madera ha encapsulado al "carpintero" y la "puerta de madera", también la fábrica de puertas de hierro ha encapsulado la "puerta de hierro" y al "soldador". Y así nos ayudó a asegurarnos de que para cada una de las puertas creadas, no recibimos a un experto en ajuste incorrecto.
+**¿Cuándo usarlo?**
 
-**When to use?**
-
-When there are interrelated dependencies with not-that-simple creation logic involved
+Cuando hay dependencias interrelacionadas con la lógica de creación
 
 👷 Builder
---------------------------------------------
-Real world example
-> Imagine you are at Hardee's and you order a specific deal, lets say, "Big Hardee" and they hand it over to you without *any questions*; this is the example of simple factory. But there are cases when the creation logic might involve more steps. For example you want a customized Subway deal, you have several options in how your burger is made e.g what bread do you want? what types of sauces would you like? What cheese would you want? etc. In such cases builder pattern comes to the rescue.
+----------
+Ejemplo del mundo real
+> Imagina que estás en la hamburguesería Hardee's y pides una hamburguesa específica, digamos, la "Big Hardee" y la entregan sin *ninguna pregunta*; este es el ejemplo de Simple Factory. Pero hay casos en que la lógica de creación puede implicar más pasos. Por ejemplo, si desea personalizar los ingredientes, tiene varias opciones sobre cómo se hace la hamburguesa, por ejemplo, ¿qué pan desea? ¿Qué tipo de salsas te gustaría? ¿Qué queso quieres? etc. En tales casos, el patrón  Builder es el adecuado.
+De forma sencilla
+> Le permite crear diferentes sabores de un objeto mientras evita la contaminación del constructor. Útil cuando puede haber varios sabores de un objeto. O cuando hay muchos pasos involucrados en la creación de un objeto.
 
-In plain words
-> Allows you to create different flavors of an object while avoiding constructor pollution. Useful when there could be several flavors of an object. Or when there are a lot of steps involved in creation of an object.
+Wikipedia dice
+> El patrón Builder es un patrón de diseño de software de creación de objetos con la intención de encontrar una solución al anti-patrón del constructor telescópico.
 
-Wikipedia says
-> The builder pattern is an object creation software design pattern with the intentions of finding a solution to the telescoping constructor anti-pattern.
-
-Having said that let me add a bit about what telescoping constructor anti-pattern is. At one point or the other we have all seen a constructor like below:
+Habiendo dicho eso, permítanme agregar un poco sobre qué es el anti-patrón del constructor telescópico. En un momento u otro, todos hemos visto un constructor como el siguiente:
 
 ```php
 public function __construct($size, $cheese = true, $pepperoni = true, $tomato = false, $lettuce = true)
@@ -354,11 +350,11 @@ public function __construct($size, $cheese = true, $pepperoni = true, $tomato = 
 }
 ```
 
-As you can see; the number of constructor parameters can quickly get out of hand and it might become difficult to understand the arrangement of parameters. Plus this parameter list could keep on growing if you would want to add more options in future. This is called telescoping constructor anti-pattern.
+Como puedes ver; el número de parámetros del constructor puede irse rápidamente y puede ser difícil de entender la disposición de los parámetros. Además, esta lista de parámetros podría seguir creciendo si desea agregar más opciones en el futuro. Esto se llama anti-patrón del constructor telescópico.
 
 **Código de ejemplo**
 
-The sane alternative is to use the builder pattern. First of all we have our burger that we want to make
+La mejor alternativa es usar el patrón Builder. Antes que nada tenemos nuestra hamburguesa que queremos hacer
 
 ```php
 class Burger
@@ -381,8 +377,7 @@ class Burger
 }
 ```
 
-And then we have the builder
-
+Y luego tenemos el constructor
 ```php
 class BurgerBuilder
 {
@@ -438,26 +433,26 @@ $burger = (new BurgerBuilder(14))
                     ->build();
 ```
 
-**When to use?**
+**¿Cuándo usarlo?**
 
-When there could be several flavors of an object and to avoid the constructor telescoping. The key difference from the factory pattern is that; factory pattern is to be used when the creation is a one step process while builder pattern is to be used when the creation is a multi step process.
+Cuando podría haber varios sabores de un objeto y evitar que el constructor sea demasiado grande. La diferencia clave del patrón Simple Factory es eso; El patrón Factory se debe usar cuando la creación es un proceso de un paso, mientras que el patrón de construcción se debe usar cuando la creación es un proceso de varios pasos.
 
 🐑 Prototype
 ------------
-Real world example
-> Remember dolly? The sheep that was cloned! Lets not get into the details but the key point here is that it is all about cloning
+Ejemplo del mundo real
+> ¿Recuerdas Dolly? ¡La oveja que fue clonada! No entremos en los detalles, pero el punto clave aquí es que se trata de la clonación
 
-In plain words
-> Create object based on an existing object through cloning.
+De forma sencilla
+> Crear objeto basado en un objeto existente mediante clonación.
 
-Wikipedia says
-> The prototype pattern is a creational design pattern in software development. It is used when the type of objects to create is determined by a prototypical instance, which is cloned to produce new objects.
+Wikipedia dice
+> El patrón Prototype es un patrón de diseño de creación en el desarrollo de software. Se usa cuando el tipo de objetos para crear está determinado por una instancia prototípica, que se clona para producir nuevos objetos.
 
-In short, it allows you to create a copy of an existing object and modify it to your needs, instead of going through the trouble of creating an object from scratch and setting it up.
+En resumen, le permite crear una copia de un objeto existente y modificarlo según sus necesidades, en lugar de tomarse la molestia de crear un objeto desde cero y configurarlo.
 
 **Código de ejemplo**
 
-In PHP, it can be easily done using `clone`
+En PHP, se puede hacer fácilmente usando `clon`
 
 ```php
 class Sheep
@@ -492,7 +487,7 @@ class Sheep
     }
 }
 ```
-Then it can be cloned like below
+Entonces puede ser clonado como abajo
 ```php
 $original = new Sheep('Jolly');
 echo $original->getName(); // Jolly
@@ -505,28 +500,28 @@ echo $cloned->getName(); // Dolly
 echo $cloned->getCategory(); // Mountain sheep
 ```
 
-Also you could use the magic method `__clone` to modify the cloning behavior.
+También podría usar el método mágico `__clone` para modificar el comportamiento de clonación.
 
-**When to use?**
+**¿Cuándo usarlo?**
 
-When an object is required that is similar to existing object or when the creation would be expensive as compared to cloning.
+Cuando se requiere un objeto que es similar al objeto existente o cuando la creación sería costosa en comparación con la clonación.
 
 💍 Singleton
 ------------
-Real world example
-> There can only be one president of a country at a time. The same president has to be brought to action, whenever duty calls. President here is singleton.
+Ejemplo del mundo real
+> Solo puede haber un presidente de un país a la vez. El mismo presidente tiene que ponerse en acción cada vez que el deber le llama. El presidente aquí es singleton.
 
-In plain words
-> Ensures that only one object of a particular class is ever created.
+De forma sencilla
+> Asegura que solo se crea un objeto de una clase en particular.
 
-Wikipedia says
-> In software engineering, the singleton pattern is a software design pattern that restricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system.
+Wikipedia dice
+> En ingeniería de software, el patrón Singleton es un patrón de diseño de software que restringe la creación de instancias de una clase a un objeto. Esto es útil cuando se necesita exactamente un objeto para coordinar acciones en todo el sistema.
 
-Singleton pattern is actually considered an anti-pattern and overuse of it should be avoided. It is not necessarily bad and could have some valid use-cases but should be used with caution because it introduces a global state in your application and change to it in one place could affect in the other areas and it could become pretty difficult to debug. The other bad thing about them is it makes your code tightly coupled plus mocking the singleton could be difficult.
+El patrón Singleton en realidad se considera un antipatrón y se debe evitar su uso excesivo. No es necesariamente malo y podría tener algunos casos de uso válidos, pero debe usarse con precaución porque introduce un estado global en su aplicación y cambiarlo en un lugar podría afectar en las otras áreas siendo bastante difícil de depurar. La otra cosa mala de ellos es que hace que tu código esté bien conectado y burlarse del Singleton podría ser difícil.
 
 **Código de ejemplo**
 
-To create a singleton, make the constructor private, disable cloning, disable extension and create a static variable to house the instance
+Para crear un Singleton haga que el constructor sea privado, desactive la clonación, deshabilite la extensión y cree una variable estática para albergar la instancia
 ```php
 final class President
 {
@@ -557,7 +552,7 @@ final class President
     }
 }
 ```
-Then in order to use
+Entonces para usar
 ```php
 $president1 = President::getInstance();
 $president2 = President::getInstance();
@@ -565,13 +560,13 @@ $president2 = President::getInstance();
 var_dump($president1 === $president2); // true
 ```
 
-Structural Design Patterns
-==========================
-In plain words
-> Structural patterns are mostly concerned with object composition or in other words how the entities can use each other. Or yet another explanation would be, they help in answering "How to build a software component?"
+Patrones de Diseño de Estructura
+================================
+De forma sencilla
+> Los patrones estructurales están principalmente relacionados con la composición de objetos o, en otras palabras, cómo las entidades pueden usarse entre sí. O bien, otra explicación sería, ayudan a responder "¿Cómo construir un componente de software?"
 
-Wikipedia says
-> In software engineering, structural design patterns are design patterns that ease the design by identifying a simple way to realize relationships between entities.
+Wikipedia dice
+> En ingeniería de software, los patrones de diseño estructural son patrones de diseño que facilitan el diseño al identificar una forma simple de realizar relaciones entre entidades.
 
  * [Adapter](#-adapter)
  * [Bridge](#-bridge)
@@ -582,23 +577,23 @@ Wikipedia says
  * [Proxy](#-proxy)
 
 🔌 Adapter
--------
-Real world example
-> Consider that you have some pictures in your memory card and you need to transfer them to your computer. In order to transfer them you need some kind of adapter that is compatible with your computer ports so that you can attach memory card to your computer. In this case card reader is an adapter.
-> Another example would be the famous power adapter; a three legged plug can't be connected to a two pronged outlet, it needs to use a power adapter that makes it compatible with the two pronged outlet.
-> Yet another example would be a translator translating words spoken by one person to another
+----------
+Ejemplo del mundo real
+> Considere que tiene algunas imágenes en su tarjeta de memoria y que necesita transferirlas a su computadora. Para transferirlos necesita algún tipo de adaptador que sea compatible con los puertos de su computadora para que pueda conectar la tarjeta de memoria a su computadora. En este caso, el lector de tarjetas es un adaptador.
+> Otro ejemplo sería el famoso adaptador de corriente; un enchufe de tres patas no se puede conectar a un toma de corriente de dos patillas, necesita usar un adaptador de corriente que lo haga compatible con el enchufe de dos patillas.
+> Otro ejemplo más sería un traductor que traduce palabras que una persona habla a otra
 
-In plain words
-> Adapter pattern lets you wrap an otherwise incompatible object in an adapter to make it compatible with another class.
+De forma sencilla
+> El patrón de adaptador le permite envolver un objeto incompatible en un adaptador para hacerlo compatible con otra clase.
 
-Wikipedia says
-> In software engineering, the adapter pattern is a software design pattern that allows the interface of an existing class to be used as another interface. It is often used to make existing classes work with others without modifying their source code.
+Wikipedia dice
+> En ingeniería de software, el patrón Adapter es un patrón de diseño de software que permite utilizar la interfaz de una clase existente como otra interfaz. A menudo se usa para hacer que las clases existentes funcionen con otras sin modificar su código fuente.
 
 **Código de ejemplo**
 
-Consider a game where there is a hunter and he hunts lions.
+Considera un juego donde hay un cazador al que le gusta cazar leones.
 
-First we have an interface `Lion` that all types of lions have to implement
+Primero tenemos una interfaz del tipo León donde caben todos los tipos de leones que se pueden implementar
 
 ```php
 interface Lion
@@ -620,7 +615,7 @@ class AsianLion implements Lion
     }
 }
 ```
-And hunter expects any implementation of `Lion` interface to hunt.
+El cazador espera que cualquier implementación de la interfaz `Lion` pueda ser cazada.
 ```php
 class Hunter
 {
@@ -630,7 +625,7 @@ class Hunter
 }
 ```
 
-Now let's say we have to add a `WildDog` in our game so that hunter can hunt that also. But we can't do that directly because dog has a different interface. To make it compatible for our hunter, we will have to create an adapter that is compatible
+Ahora digamos que tenemos que agregar un perro salvaje en nuestro juego para que el cazador pueda cazar eso también. Pero no podemos hacer eso directamente porque el perro tiene una interfaz diferente. Para que sea compatible con nuestro cazador, tendremos que crear un adaptador que sea compatible
 
 ```php
 // This needs to be added to the game
@@ -657,8 +652,7 @@ class WildDogAdapter implements Lion
     }
 }
 ```
-And now the `WildDog` can be used in our game using `WildDogAdapter`.
-
+Y ahora el perro salvaje se puede usar en nuestro juego usando `WildDogAdapter`.
 ```php
 $wildDog = new WildDog();
 $wildDogAdapter = new WildDogAdapter($wildDog);
@@ -668,21 +662,21 @@ $hunter->hunt($wildDogAdapter);
 ```
 
 🚡 Bridge
-------
-Real world example
-> Consider you have a website with different pages and you are supposed to allow the user to change the theme. What would you do? Create multiple copies of each of the pages for each of the themes or would you just create separate theme and load them based on the user's preferences? Bridge pattern allows you to do the second i.e.
+---------
+Ejemplo del mundo real
+> Considere que tiene un sitio web con diferentes páginas y se supone que debe permitir que el usuario cambie el tema. ¿Qué harías? Cree copias múltiples de cada una de las páginas para cada tema o simplemente cree un tema separado y cárguelo según las preferencias del usuario. El patrón Bridge le permite implementar la segundoa opción, es decir
 
 ![With and without the bridge pattern](https://cloud.githubusercontent.com/assets/11269635/23065293/33b7aea0-f515-11e6-983f-98823c9845ee.png)
 
-In Plain Words
-> Bridge pattern is about preferring composition over inheritance. Implementation details are pushed from a hierarchy to another object with a separate hierarchy.
+De forma sencilla
+> El patrón de puente se trata de preferir la composición a la herencia. Los detalles de implementación se envían desde una jerarquía a otro objeto con una jerarquía separada.
 
-Wikipedia says
-> The bridge pattern is a design pattern used in software engineering that is meant to "decouple an abstraction from its implementation so that the two can vary independently"
+Wikipedia dice
+> El patrón de puente es un patrón de diseño utilizado en ingeniería de software que tiene por objeto "desacoplar una abstracción de su implementación para que los dos puedan variar de forma independiente"
 
 **Código de ejemplo**
 
-Translating our WebPage example from above. Here we have the `WebPage` hierarchy
+Traduciendo nuestro ejemplo de página web desde arriba. Aquí tenemos la jerarquía `WebPage`
 
 ```php
 interface WebPage
@@ -765,13 +759,13 @@ echo $careers->getContent(); // "Careers page in Dark Black";
 🌿 Composite
 -----------------
 
-Real world example
+Ejemplo del mundo real
 > Every organization is composed of employees. Each of the employees has the same features i.e. has a salary, has some responsibilities, may or may not report to someone, may or may not have some subordinates etc.
 
-In plain words
+De forma sencilla
 > Composite pattern lets clients treat the individual objects in a uniform manner.
 
-Wikipedia says
+Wikipedia dice
 > In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes that a group of objects is to be treated in the same way as a single instance of an object. The intent of a composite is to "compose" objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets clients treat individual objects and compositions uniformly.
 
 **Código de ejemplo**
@@ -898,14 +892,14 @@ echo "Net salaries: " . $organization->getNetSalaries(); // Net Salaries: 27000
 ☕ Decorator
 -------------
 
-Real world example
+Ejemplo del mundo real
 
 > Imagine you run a car service shop offering multiple services. Now how do you calculate the bill to be charged? You pick one service and dynamically keep adding to it the prices for the provided services till you get the final cost. Here each type of service is a decorator.
 
-In plain words
+De forma sencilla
 > Decorator pattern lets you dynamically change the behavior of an object at run time by wrapping them in an object of a decorator class.
 
-Wikipedia says
+Wikipedia dice
 > In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class. The decorator pattern is often useful for adhering to the Single Responsibility Principle, as it allows functionality to be divided between classes with unique areas of concern.
 
 **Código de ejemplo**
@@ -1018,13 +1012,13 @@ echo $someCoffee->getDescription(); // Simple Coffee, milk, whip, vanilla
 📦 Facade
 ----------------
 
-Real world example
+Ejemplo del mundo real
 > How do you turn on the computer? "Hit the power button" you say! That is what you believe because you are using a simple interface that computer provides on the outside, internally it has to do a lot of stuff to make it happen. This simple interface to the complex subsystem is a facade.
 
-In plain words
+De forma sencilla
 > Facade pattern provides a simplified interface to a complex subsystem.
 
-Wikipedia says
+Wikipedia dice
 > A facade is an object that provides a simplified interface to a larger body of code, such as a class library.
 
 **Código de ejemplo**
@@ -1107,13 +1101,13 @@ $computer->turnOff(); // Bup bup buzzz! Haah! Zzzzz
 🍃 Flyweight
 ---------
 
-Real world example
+Ejemplo del mundo real
 > Did you ever have fresh tea from some stall? They often make more than one cup that you demanded and save the rest for any other customer so to save the resources e.g. gas etc. Flyweight pattern is all about that i.e. sharing.
 
-In plain words
+De forma sencilla
 > It is used to minimize memory usage or computational expenses by sharing as much as possible with similar objects.
 
-Wikipedia says
+Wikipedia dice
 > In computer programming, flyweight is a software design pattern. A flyweight is an object that minimizes memory use by sharing as much data as possible with other similar objects; it is a way to use objects in large numbers when a simple repeated representation would use an unacceptable amount of memory.
 
 **Código de ejemplo**
@@ -1187,13 +1181,13 @@ $shop->serve();
 
 🎱 Proxy
 -------------------
-Real world example
+Ejemplo del mundo real
 > Have you ever used an access card to go through a door? There are multiple options to open that door i.e. it can be opened either using access card or by pressing a button that bypasses the security. The door's main functionality is to open but there is a proxy added on top of it to add some functionality. Let me better explain it using the code example below.
 
-In plain words
+De forma sencilla
 > Using the proxy pattern, a class represents the functionality of another class.
 
-Wikipedia says
+Wikipedia dice
 > A proxy, in its most general form, is a class functioning as an interface to something else. A proxy is a wrapper or agent object that is being called by the client to access the real serving object behind the scenes. Use of the proxy can simply be forwarding to the real object, or can provide additional logic. In the proxy extra functionality can be provided, for example caching when operations on the real object are resource intensive, or checking preconditions before operations on the real object are invoked.
 
 **Código de ejemplo**
@@ -1264,10 +1258,10 @@ Yet another example would be some sort of data-mapper implementation. For exampl
 Behavioral Design Patterns
 ==========================
 
-In plain words
+De forma sencilla
 > It is concerned with assignment of responsibilities between the objects. What makes them different from structural patterns is they don't just specify the structure but also outline the patterns for message passing/communication between them. Or in other words, they assist in answering "How to run a behavior in software component?"
 
-Wikipedia says
+Wikipedia dice
 > In software engineering, behavioral design patterns are design patterns that identify common communication patterns between objects and realize these patterns. By doing so, these patterns increase flexibility in carrying out this communication.
 
 * [Chain of Responsibility](#-chain-of-responsibility)
@@ -1284,13 +1278,13 @@ Wikipedia says
 🔗 Chain of Responsibility
 -----------------------
 
-Real world example
+Ejemplo del mundo real
 > For example, you have three payment methods (`A`, `B` and `C`) setup in your account; each having a different amount in it. `A` has 100 USD, `B` has 300 USD and `C` having 1000 USD and the preference for payments is chosen as `A` then `B` then `C`. You try to purchase something that is worth 210 USD. Using Chain of Responsibility, first of all account `A` will be checked if it can make the purchase, if yes purchase will be made and the chain will be broken. If not, request will move forward to account `B` checking for amount if yes chain will be broken otherwise the request will keep forwarding till it finds the suitable handler. Here `A`, `B` and `C` are links of the chain and the whole phenomenon is Chain of Responsibility.
 
-In plain words
+De forma sencilla
 > It helps building a chain of objects. Request enters from one end and keeps going from object to object till it finds the suitable handler.
 
-Wikipedia says
+Wikipedia dice
 > In object-oriented design, the chain-of-responsibility pattern is a design pattern consisting of a source of command objects and a series of processing objects. Each processing object contains logic that defines the types of command objects that it can handle; the rest are passed to the next processing object in the chain.
 
 **Código de ejemplo**
@@ -1387,14 +1381,14 @@ $bank->pay(259);
 👮 Command
 -------
 
-Real world example
+Ejemplo del mundo real
 > A generic example would be you ordering food at a restaurant. You (i.e. `Client`) ask the waiter (i.e. `Invoker`) to bring some food (i.e. `Command`) and waiter simply forwards the request to Chef (i.e. `Receiver`) who has the knowledge of what and how to cook.
 > Another example would be you (i.e. `Client`) switching on (i.e. `Command`) the television (i.e. `Receiver`) using a remote control (`Invoker`).
 
-In plain words
+De forma sencilla
 > Allows you to encapsulate actions in objects. The key idea behind this pattern is to provide the means to decouple client from receiver.
 
-Wikipedia says
+Wikipedia dice
 > In object-oriented programming, the command pattern is a behavioral design pattern in which an object is used to encapsulate all information needed to perform an action or trigger an event at a later time. This information includes the method name, the object that owns the method and values for the method parameters.
 
 **Código de ejemplo**
@@ -1503,13 +1497,13 @@ Command pattern can also be used to implement a transaction based system. Where 
 ➿ Iterator
 --------
 
-Real world example
+Ejemplo del mundo real
 > An old radio set will be a good example of iterator, where user could start at some channel and then use next or previous buttons to go through the respective channels. Or take an example of MP3 player or a TV set where you could press the next and previous buttons to go through the consecutive channels or in other words they all provide an interface to iterate through the respective channels, songs or radio stations.  
 
-In plain words
+De forma sencilla
 > It presents a way to access the elements of an object without exposing the underlying presentation.
 
-Wikipedia says
+Wikipedia dice
 > In object-oriented programming, the iterator pattern is a design pattern in which an iterator is used to traverse a container and access the container's elements. The iterator pattern decouples algorithms from containers; in some cases, algorithms are necessarily container-specific and thus cannot be decoupled.
 
 **Código de ejemplo**
@@ -1609,13 +1603,13 @@ $stationList->removeStation(new RadioStation(89)); // Will remove station 89
 👽 Mediator
 ========
 
-Real world example
+Ejemplo del mundo real
 > A general example would be when you talk to someone on your mobile phone, there is a network provider sitting between you and them and your conversation goes through it instead of being directly sent. In this case network provider is mediator.
 
-In plain words
+De forma sencilla
 > Mediator pattern adds a third party object (called mediator) to control the interaction between two objects (called colleagues). It helps reduce the coupling between the classes communicating with each other. Because now they don't need to have the knowledge of each other's implementation.
 
-Wikipedia says
+Wikipedia dice
 > In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
 
 **Código de ejemplo**
@@ -1680,13 +1674,13 @@ $jane->send('Hey!');
 
 💾 Memento
 -------
-Real world example
+Ejemplo del mundo real
 > Take the example of calculator (i.e. originator), where whenever you perform some calculation the last calculation is saved in memory (i.e. memento) so that you can get back to it and maybe get it restored using some action buttons (i.e. caretaker).
 
-In plain words
+De forma sencilla
 > Memento pattern is about capturing and storing the current state of an object in a manner that it can be restored later on in a smooth manner.
 
-Wikipedia says
+Wikipedia dice
 > The memento pattern is a software design pattern that provides the ability to restore an object to its previous state (undo via rollback).
 
 Usually useful when you need to provide some sort of undo functionality.
@@ -1769,13 +1763,13 @@ $editor->getContent(); // This is the first sentence. This is second.
 
 😎 Observer
 --------
-Real world example
+Ejemplo del mundo real
 > A good example would be the job seekers where they subscribe to some job posting site and they are notified whenever there is a matching job opportunity.   
 
-In plain words
+De forma sencilla
 > Defines a dependency between objects so that whenever an object changes its state, all its dependents are notified.
 
-Wikipedia says
+Wikipedia dice
 > The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
 
 **Código de ejemplo**
@@ -1858,13 +1852,13 @@ $jobPostings->addJob(new JobPost('Software Engineer'));
 
 🏃 Visitor
 -------
-Real world example
+Ejemplo del mundo real
 > Consider someone visiting Dubai. They just need a way (i.e. visa) to enter Dubai. After arrival, they can come and visit any place in Dubai on their own without having to ask for permission or to do some leg work in order to visit any place here; just let them know of a place and they can visit it. Visitor pattern lets you do just that, it helps you add places to visit so that they can visit as much as they can without having to do any legwork.
 
-In plain words
+De forma sencilla
 > Visitor pattern lets you add further operations to objects without having to modify them.
 
-Wikipedia says
+Wikipedia dice
 > In object-oriented programming and software engineering, the visitor design pattern is a way of separating an algorithm from an object structure on which it operates. A practical result of this separation is the ability to add new operations to existing object structures without modifying those structures. It is one way to follow the open/closed principle.
 
 **Código de ejemplo**
@@ -1998,13 +1992,13 @@ $dolphin->accept($jump);   // Walked on water a little and disappeared
 💡 Strategy
 --------
 
-Real world example
+Ejemplo del mundo real
 > Consider the example of sorting, we implemented bubble sort but the data started to grow and bubble sort started getting very slow. In order to tackle this we implemented Quick sort. But now although the quick sort algorithm was doing better for large datasets, it was very slow for smaller datasets. In order to handle this we implemented a strategy where for small datasets, bubble sort will be used and for larger, quick sort.
 
-In plain words
+De forma sencilla
 > Strategy pattern allows you to switch the algorithm or strategy based upon the situation.
 
-Wikipedia says
+Wikipedia dice
 > In computer programming, the strategy pattern (also known as the policy pattern) is a behavioural software design pattern that enables an algorithm's behavior to be selected at runtime.
 
 **Código de ejemplo**
@@ -2070,13 +2064,13 @@ $sorter->sort($dataset); // Output : Sorting using quick sort
 
 💢 State
 -----
-Real world example
+Ejemplo del mundo real
 > Imagine you are using some drawing application, you choose the paint brush to draw. Now the brush changes its behavior based on the selected color i.e. if you have chosen red color it will draw in red, if blue then it will be in blue etc.  
 
-In plain words
+De forma sencilla
 > It lets you change the behavior of a class when the state changes.
 
-Wikipedia says
+Wikipedia dice
 > The state pattern is a behavioral software design pattern that implements a state machine in an object-oriented way. With the state pattern, a state machine is implemented by implementing each individual state as a derived class of the state pattern interface, and implementing state transitions by invoking methods defined by the pattern's superclass.
 > The state pattern can be interpreted as a strategy pattern which is able to switch the current strategy through invocations of methods defined in the pattern's interface.
 
@@ -2165,7 +2159,7 @@ $editor->type('Fifth line');
 📒 Template Method
 ---------------
 
-Real world example
+Ejemplo del mundo real
 > Suppose we are getting some house built. The steps for building might look like
 > - Prepare the base of house
 > - Build the walls
@@ -2174,10 +2168,10 @@ Real world example
 
 > The order of these steps could never be changed i.e. you can't build the roof before building the walls etc but each of the steps could be modified for example walls can be made of wood or polyester or stone.
 
-In plain words
+De forma sencilla
 > Template method defines the skeleton of how a certain algorithm could be performed, but defers the implementation of those steps to the children classes.
 
-Wikipedia says
+Wikipedia dice
 > In software engineering, the template method pattern is a behavioral design pattern that defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. It lets one redefine certain steps of an algorithm without changing the algorithm's structure.
 
 **Código de ejemplo**
