@@ -19,7 +19,7 @@ Este es un tema que puede hacer que la mente de cualquiera se tambalee fácilmen
 🚀 Introducción
 =================
 
-Los patrones de diseño nacen como soluciones para problemas recurrentes; ** pautas sobre cómo abordar ciertos problemas **. No son clases, paquetes o bibliotecas que puedes conectar a tu aplicación y esperar a que suceda la magia. Estas son, más bien, pautas sobre cómo abordar ciertos problemas en ciertas situaciones.
+Los patrones de diseño nacen como soluciones para problemas recurrentes; **pautas sobre cómo abordar ciertos problemas**. No son clases, paquetes o bibliotecas que puedes conectar a tu aplicación y esperar a que suceda la magia. Estas son, más bien, pautas sobre cómo abordar ciertos problemas en ciertas situaciones.
 
 > Los patrones de diseño son soluciones para problemas recurrentes; pautas sobre cómo abordar ciertos problemas
 
