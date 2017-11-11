@@ -760,18 +760,16 @@ echo $careers->getContent(); // "Careers page in Dark Black";
 -----------------
 
 Ejemplo del mundo real
-> Every organization is composed of employees. Each of the employees has the same features i.e. has a salary, has some responsibilities, may or may not report to someone, may or may not have some subordinates etc.
+> Pensemos en una organización que está compuesta de empleados. Cada uno de los empleados tiene las mismas características, es decir, tiene un salario, tiene algunas responsabilidades, puede o no informar a alguien, puede o no tener subordinados, etc.
 
 De forma sencilla
-> Composite pattern lets clients treat the individual objects in a uniform manner.
+> El patrón Composite permite a los clientes tratar los objetos individuales de manera uniforme.
 
 Wikipedia dice
-> In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes that a group of objects is to be treated in the same way as a single instance of an object. The intent of a composite is to "compose" objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets clients treat individual objects and compositions uniformly.
-
+> En ingeniería de software, el patrón Composite es un patrón de diseño de partición. El patrón Composite describe que un grupo de objetos se debe tratar de la misma manera que una instancia única de un objeto. La intención de un compuesto es "componer" objetos en estructuras de árbol para representar jerarquías de parte-todo. La implementación del patrón compuesto permite a los clientes tratar objetos individuales y composiciones de manera uniforme.
 **Código de ejemplo**
 
-Taking our employees example from above. Here we have different employee types
-
+Tomando el ejemplo de nuestros empleados de arriba. Aquí tenemos diferentes tipos de empleados
 ```php
 interface Employee
 {
@@ -849,7 +847,7 @@ class Designer implements Employee
 }
 ```
 
-Then we have an organization which consists of several different types of employees
+Entonces tenemos una organización que consiste en varios tipos diferentes de empleados
 
 ```php
 class Organization
@@ -874,8 +872,7 @@ class Organization
 }
 ```
 
-And then it can be used as
-
+Y luego puede usarse como
 ```php
 // Prepare the employees
 $john = new Developer('John Doe', 12000);
@@ -894,18 +891,17 @@ echo "Net salaries: " . $organization->getNetSalaries(); // Net Salaries: 27000
 
 Ejemplo del mundo real
 
-> Imagine you run a car service shop offering multiple services. Now how do you calculate the bill to be charged? You pick one service and dynamically keep adding to it the prices for the provided services till you get the final cost. Here each type of service is a decorator.
+> Imagine que tiene un taller de servicio de automóviles que ofrece múltiples servicios. Ahora, ¿cómo se calcula la factura que se cobrará? Usted elige un servicio y continúa agregando dinámicamente los precios de los servicios prestados hasta que obtiene el costo final. Aquí cada tipo de servicio es un decorador.
 
 De forma sencilla
-> Decorator pattern lets you dynamically change the behavior of an object at run time by wrapping them in an object of a decorator class.
+> El patrón Decorator le permite cambiar dinámicamente el comportamiento de un objeto en tiempo de ejecución envolviéndolo en un objeto de una clase de decorador.
 
 Wikipedia dice
-> In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class. The decorator pattern is often useful for adhering to the Single Responsibility Principle, as it allows functionality to be divided between classes with unique areas of concern.
+> En la programación orientada a objetos, el patrón de Decorator es un patrón de diseño que permite agregar un comportamiento a un objeto individual, ya sea estática o dinámicamente, sin afectar el comportamiento de otros objetos de la misma clase. El patrón decorador es a menudo útil para cumplir con el Principio de Responsabilidad Única, ya que permite que la funcionalidad se divida entre clases con áreas de preocupación únicas.
 
 **Código de ejemplo**
 
-Lets take coffee for example. First of all we have a simple coffee implementing the coffee interface
-
+Vamos a tomar café, por ejemplo. En primer lugar, tenemos un café simple que implementa la interfaz del café
 ```php
 interface Coffee
 {
@@ -926,7 +922,7 @@ class SimpleCoffee implements Coffee
     }
 }
 ```
-We want to make the code extensible to allow options to modify it if required. Lets make some add-ons (decorators)
+Queremos que el código sea extensible para permitir que las opciones lo modifiquen si es necesario. Vamos a hacer algunos complementos (decoradores)
 ```php
 class MilkCoffee implements Coffee
 {
@@ -989,8 +985,7 @@ class VanillaCoffee implements Coffee
 }
 ```
 
-Lets make a coffee now
-
+Vamos a hacer un café ahora
 ```php
 $someCoffee = new SimpleCoffee();
 echo $someCoffee->getCost(); // 10
@@ -1013,18 +1008,17 @@ echo $someCoffee->getDescription(); // Simple Coffee, milk, whip, vanilla
 ----------------
 
 Ejemplo del mundo real
-> How do you turn on the computer? "Hit the power button" you say! That is what you believe because you are using a simple interface that computer provides on the outside, internally it has to do a lot of stuff to make it happen. This simple interface to the complex subsystem is a facade.
+> ¿Cómo enciendes la computadora? "¡Presiona el botón de encendido!" Eso es lo que crees porque estás usando una interfaz simple que la computadora proporciona en el exterior, internamente tiene que hacer muchas cosas para que suceda. Esta interfaz simple para el subsistema complejo es una fachada.
 
 De forma sencilla
-> Facade pattern provides a simplified interface to a complex subsystem.
+> El patrón Facade proporciona una interfaz simplificada para un subsistema complejo.
 
 Wikipedia dice
-> A facade is an object that provides a simplified interface to a larger body of code, such as a class library.
+> Una fachada es un objeto que proporciona una interfaz simplificada para un cuerpo de código más grande, como una biblioteca de clases.
 
 **Código de ejemplo**
 
-Taking our computer example from above. Here we have the computer class
-
+Tomando nuestro ejemplo de computadora desde arriba. Aquí tenemos la clase de computadora
 ```php
 class Computer
 {
@@ -1064,7 +1058,7 @@ class Computer
     }
 }
 ```
-Here we have the facade
+Aquí tenemos la fachada
 ```php
 class ComputerFacade
 {
@@ -1091,7 +1085,7 @@ class ComputerFacade
     }
 }
 ```
-Now to use the facade
+Ahora para usar la fachada
 ```php
 $computer = new ComputerFacade(new Computer());
 $computer->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
@@ -1102,17 +1096,17 @@ $computer->turnOff(); // Bup bup buzzz! Haah! Zzzzz
 ---------
 
 Ejemplo del mundo real
-> Did you ever have fresh tea from some stall? They often make more than one cup that you demanded and save the rest for any other customer so to save the resources e.g. gas etc. Flyweight pattern is all about that i.e. sharing.
+> ¿Alguna vez tomaste té fresco de algún puesto? A menudo hacen más de una taza y guardan el resto para cualquier otro cliente para ahorrar los recursos, p. gas, etc. El patrón de peso mosca se trata de eso, es decir, compartir.
 
 De forma sencilla
-> It is used to minimize memory usage or computational expenses by sharing as much as possible with similar objects.
+> Se usa para minimizar el uso de la memoria o los gastos computacionales al compartir tanto como sea posible con objetos similares.
 
 Wikipedia dice
-> In computer programming, flyweight is a software design pattern. A flyweight is an object that minimizes memory use by sharing as much data as possible with other similar objects; it is a way to use objects in large numbers when a simple repeated representation would use an unacceptable amount of memory.
+> En programación de computadoras, flyweight es un patrón de diseño de software. Un flyweight es un objeto que minimiza el uso de memoria al compartir tantos datos como sea posible con otros objetos similares; es una forma de usar objetos en grandes cantidades cuando una representación repetida simple usaría una cantidad inaceptable de memoria.
 
 **Código de ejemplo**
 
-Translating our tea example from above. First of all we have tea types and tea maker
+Traduciendo nuestro ejemplo de té de arriba. Antes que nada, tenemos tipos de té y teteras
 
 ```php
 // Anything that will be cached is flyweight.
@@ -1137,8 +1131,7 @@ class TeaMaker
 }
 ```
 
-Then we have the `TeaShop` which takes orders and serves them
-
+Luego tenemos el `TeaShop` que toma pedidos y los sirve
 ```php
 class TeaShop
 {
@@ -1163,8 +1156,7 @@ class TeaShop
     }
 }
 ```
-And it can be used as below
-
+Y puede ser utilizado como abajo
 ```php
 $teaMaker = new TeaMaker();
 $shop = new TeaShop($teaMaker);
@@ -1182,18 +1174,17 @@ $shop->serve();
 🎱 Proxy
 -------------------
 Ejemplo del mundo real
-> Have you ever used an access card to go through a door? There are multiple options to open that door i.e. it can be opened either using access card or by pressing a button that bypasses the security. The door's main functionality is to open but there is a proxy added on top of it to add some functionality. Let me better explain it using the code example below.
+> ¿Alguna vez ha usado una tarjeta de acceso para pasar por una puerta? Hay varias opciones para abrir esa puerta, es decir, se puede abrir con una tarjeta de acceso o presionando un botón que pasa por alto la seguridad. La funcionalidad principal de la puerta es abrir pero hay un proxy agregado encima para agregar alguna funcionalidad. Permítanme explicarlo mejor usando el siguiente ejemplo de código.
 
 De forma sencilla
-> Using the proxy pattern, a class represents the functionality of another class.
+> Usando el patrón de proxy, una clase representa la funcionalidad de otra clase.
 
 Wikipedia dice
-> A proxy, in its most general form, is a class functioning as an interface to something else. A proxy is a wrapper or agent object that is being called by the client to access the real serving object behind the scenes. Use of the proxy can simply be forwarding to the real object, or can provide additional logic. In the proxy extra functionality can be provided, for example caching when operations on the real object are resource intensive, or checking preconditions before operations on the real object are invoked.
+> Un proxy, en su forma más general, es una clase que funciona como una interfaz para otra cosa. Un proxy es un envoltorio o un objeto de agente que el cliente está llamando para acceder al objeto de servicio real detrás de las escenas. El uso del proxy simplemente puede reenviarse al objeto real, o puede proporcionar una lógica adicional. En el proxy, se puede proporcionar una funcionalidad adicional, por ejemplo, el almacenamiento en caché cuando las operaciones en el objeto real consumen muchos recursos, o la comprobación de precondiciones antes de invocar operaciones en el objeto real.
 
 **Código de ejemplo**
 
-Taking our security door example from above. Firstly we have the door interface and an implementation of door
-
+Tomando nuestro ejemplo de puerta de seguridad desde arriba. En primer lugar tenemos la interfaz de la puerta y una implementación de la puerta
 ```php
 interface Door
 {
@@ -1214,8 +1205,7 @@ class LabDoor implements Door
     }
 }
 ```
-Then we have a proxy to secure any doors that we want
-```php
+Entonces tenemos un proxy para asegurar las puertas que queremos```php
 class Security
 {
     protected $door;
@@ -1245,7 +1235,7 @@ class Security
     }
 }
 ```
-And here is how it can be used
+Y así es como se puede usar
 ```php
 $door = new Security(new LabDoor());
 $door->open('invalid'); // Big no! It ain't possible.
@@ -1253,16 +1243,16 @@ $door->open('invalid'); // Big no! It ain't possible.
 $door->open('$ecr@t'); // Opening lab door
 $door->close(); // Closing lab door
 ```
-Yet another example would be some sort of data-mapper implementation. For example, I recently made an ODM (Object Data Mapper) for MongoDB using this pattern where I wrote a proxy around mongo classes while utilizing the magic method `__call()`. All the method calls were proxied to the original mongo class and result retrieved was returned as it is but in case of `find` or `findOne` data was mapped to the required class objects and the object was returned instead of `Cursor`.
+Otro ejemplo más sería algún tipo de implementación del mapeador de datos. Por ejemplo, recientemente hice un ODM (Object Data Mapper) para MongoDB usando este patrón donde escribí un proxy alrededor de las clases de mongo mientras utilizaba el método mágico `__call ()`. Todas las llamadas a métodos fueron transferidas a la clase mongo original y el resultado recuperado se devolvió tal cual, pero en el caso de los datos `find` o` findOne` se asignaron a los objetos de clase requeridos y se devolvió el objeto en lugar de `Cursor`.
 
-Behavioral Design Patterns
-==========================
+Patrones de Diseño de Comportamiento
+====================================
 
 De forma sencilla
-> It is concerned with assignment of responsibilities between the objects. What makes them different from structural patterns is they don't just specify the structure but also outline the patterns for message passing/communication between them. Or in other words, they assist in answering "How to run a behavior in software component?"
+> Se ocupa de la asignación de responsabilidades entre los objetos. Lo que los hace diferentes de los patrones estructurales es que no solo especifican la estructura, sino que también delinean los patrones de transmisión / comunicación de mensajes entre ellos. O en otras palabras, ayudan a responder "¿Cómo ejecutar un comportamiento en el componente de software?"
 
 Wikipedia dice
-> In software engineering, behavioral design patterns are design patterns that identify common communication patterns between objects and realize these patterns. By doing so, these patterns increase flexibility in carrying out this communication.
+> En ingeniería de software, los patrones de diseño de comportamiento son patrones de diseño que identifican patrones de comunicación comunes entre objetos y realizan estos patrones. Al hacerlo, estos patrones aumentan la flexibilidad al llevar a cabo esta comunicación.
 
 * [Chain of Responsibility](#-chain-of-responsibility)
 * [Command](#-command)
@@ -1276,21 +1266,20 @@ Wikipedia dice
 * [Template Method](#-template-method)
 
 🔗 Chain of Responsibility
------------------------
+--------------------------
 
 Ejemplo del mundo real
-> For example, you have three payment methods (`A`, `B` and `C`) setup in your account; each having a different amount in it. `A` has 100 USD, `B` has 300 USD and `C` having 1000 USD and the preference for payments is chosen as `A` then `B` then `C`. You try to purchase something that is worth 210 USD. Using Chain of Responsibility, first of all account `A` will be checked if it can make the purchase, if yes purchase will be made and the chain will be broken. If not, request will move forward to account `B` checking for amount if yes chain will be broken otherwise the request will keep forwarding till it finds the suitable handler. Here `A`, `B` and `C` are links of the chain and the whole phenomenon is Chain of Responsibility.
+> Por ejemplo, tiene tres métodos de pago ("A", "B" y "C") configurados en su cuenta; cada uno tiene una cantidad diferente en él. `A` tiene 100 USD,` B` tiene 300 USD y `C` tiene 1000 USD y la preferencia de pago se elige como` A`, luego `B` y` C`. Intenta comprar algo que valga 210 USD. Usando Chain of Responsibility, antes que nada, la cuenta `A` se verificará si puede hacer la compra; si es así, se realizará la compra y la cadena se romperá. De lo contrario, la solicitud avanzará a la cuenta `B` que comprueba la cantidad si la cadena sí se romperá; de lo contrario, la solicitud seguirá reenviando hasta que encuentre el controlador adecuado. Aquí `A`,` B` y `C` son enlaces de la cadena y todo el fenómeno es Chain of Responsibility.
 
 De forma sencilla
-> It helps building a chain of objects. Request enters from one end and keeps going from object to object till it finds the suitable handler.
+> Ayuda a construir una cadena de objetos. La solicitud ingresa desde un extremo y continúa yendo de un objeto a otro hasta encontrar el controlador adecuado.
 
 Wikipedia dice
-> In object-oriented design, the chain-of-responsibility pattern is a design pattern consisting of a source of command objects and a series of processing objects. Each processing object contains logic that defines the types of command objects that it can handle; the rest are passed to the next processing object in the chain.
+> En el diseño orientado a objetos, el patrón de cadena de responsabilidad es un patrón de diseño que consiste en una fuente de objetos de comando y una serie de objetos de procesamiento. Cada objeto de procesamiento contiene lógica que define los tipos de objetos de comando que puede manejar; el resto pasa al siguiente objeto de procesamiento en la cadena.
 
 **Código de ejemplo**
 
-Translating our account example above. First of all we have a base account having the logic for chaining the accounts together and some accounts
-
+Traduciendo nuestro ejemplo de cuenta arriba. En primer lugar, tenemos una cuenta base que tiene la lógica para encadenar las cuentas juntas y algunas cuentas
 ```php
 abstract class Account
 {
@@ -1351,8 +1340,7 @@ class Bitcoin extends Account
 }
 ```
 
-Now let's prepare the chain using the links defined above (i.e. Bank, Paypal, Bitcoin)
-
+Ahora preparemos la cadena utilizando los enlaces definidos anteriormente (es decir, Bank, Paypal, Bitcoin)
 ```php
 // Let's prepare a chain like below
 //      $bank->$paypal->$bitcoin
@@ -1379,21 +1367,21 @@ $bank->pay(259);
 ```
 
 👮 Command
--------
+----------
 
 Ejemplo del mundo real
-> A generic example would be you ordering food at a restaurant. You (i.e. `Client`) ask the waiter (i.e. `Invoker`) to bring some food (i.e. `Command`) and waiter simply forwards the request to Chef (i.e. `Receiver`) who has the knowledge of what and how to cook.
-> Another example would be you (i.e. `Client`) switching on (i.e. `Command`) the television (i.e. `Receiver`) using a remote control (`Invoker`).
+> Un ejemplo genérico sería ordenar comida en un restaurante. Usted (es decir, "Cliente") le pide al camarero (es decir, "Invitador") que traiga algo de comida (es decir, "Mando") y el mesero simplemente reenvía la solicitud al Chef (es decir, "Receptor") que sabe qué y cómo cocinar. .
+> Otro ejemplo sería usted (es decir, 'Cliente') encendiendo (es decir, 'Command') el televisor (es decir, 'Receptor') utilizando un control remoto ('Invoker').
 
 De forma sencilla
-> Allows you to encapsulate actions in objects. The key idea behind this pattern is to provide the means to decouple client from receiver.
+> Le permite encapsular acciones en objetos. La idea clave detrás de este patrón es proporcionar los medios para desacoplar al cliente del receptor.
 
 Wikipedia dice
-> In object-oriented programming, the command pattern is a behavioral design pattern in which an object is used to encapsulate all information needed to perform an action or trigger an event at a later time. This information includes the method name, the object that owns the method and values for the method parameters.
+> En la programación orientada a objetos, el patrón de comando es un patrón de diseño de comportamiento en el cual un objeto se usa para encapsular toda la información necesaria para realizar una acción o desencadenar un evento en un momento posterior. Esta información incluye el nombre del método, el objeto que posee el método y los valores para los parámetros del método.
 
 **Código de ejemplo**
 
-First of all we have the receiver that has the implementation of every action that could be performed
+En primer lugar, tenemos el receptor que tiene la implementación de cada acción que se puede realizar
 ```php
 // Receiver
 class Bulb
@@ -1409,7 +1397,7 @@ class Bulb
     }
 }
 ```
-then we have an interface that each of the commands are going to implement and then we have a set of commands
+entonces tenemos una interfaz que cada uno de los comandos va a implementar y luego tenemos un conjunto de comandos
 ```php
 interface Command
 {
@@ -1469,7 +1457,7 @@ class TurnOff implements Command
     }
 }
 ```
-Then we have an `Invoker` with whom the client will interact to process any commands
+Luego tenemos un `Invoker` con quien el cliente interactuará para procesar cualquier comando
 ```php
 // Invoker
 class RemoteControl
@@ -1492,24 +1480,23 @@ $remote->submit($turnOn); // Bulb has been lit!
 $remote->submit($turnOff); // Darkness!
 ```
 
-Command pattern can also be used to implement a transaction based system. Where you keep maintaining the history of commands as soon as you execute them. If the final command is successfully executed, all good otherwise just iterate through the history and keep executing the `undo` on all the executed commands.
+El patrón de comando también se puede usar para implementar un sistema basado en transacciones. Donde mantiene el historial de comandos tan pronto como los ejecuta. Si el comando final se ejecuta con éxito, todo lo bueno, de lo contrario, simplemente iterar a través del historial y seguir ejecutando el `deshacer 'en todos los comandos ejecutados.
 
 ➿ Iterator
---------
+-----------
 
 Ejemplo del mundo real
-> An old radio set will be a good example of iterator, where user could start at some channel and then use next or previous buttons to go through the respective channels. Or take an example of MP3 player or a TV set where you could press the next and previous buttons to go through the consecutive channels or in other words they all provide an interface to iterate through the respective channels, songs or radio stations.  
+> Un viejo conjunto de radio será un buen ejemplo de iterador, donde el usuario podría comenzar en algún canal y luego usar los botones siguiente o anterior para ir a través de los canales respectivos. O tome un ejemplo de reproductor de MP3 o un televisor donde puede presionar los botones siguiente y anterior para pasar por los canales consecutivos o, en otras palabras, todos ellos proporcionan una interfaz para iterar a través de los respectivos canales, canciones o estaciones de radio.
 
 De forma sencilla
-> It presents a way to access the elements of an object without exposing the underlying presentation.
+> Presenta una forma de acceder a los elementos de un objeto sin exponer la presentación subyacente.
 
 Wikipedia dice
-> In object-oriented programming, the iterator pattern is a design pattern in which an iterator is used to traverse a container and access the container's elements. The iterator pattern decouples algorithms from containers; in some cases, algorithms are necessarily container-specific and thus cannot be decoupled.
+> En la programación orientada a objetos, el patrón de iterador es un patrón de diseño en el que se utiliza un iterador para atravesar un contenedor y acceder a los elementos del contenedor. El patrón de iterador desacopla los algoritmos de los contenedores; en algunos casos, los algoritmos son necesariamente específicos del contenedor y, por lo tanto, no se pueden desacoplar.
 
 **Código de ejemplo**
 
-In PHP it is quite easy to implement using SPL (Standard PHP Library). Translating our radio stations example from above. First of all we have `RadioStation`
-
+En PHP, es bastante fácil de implementar utilizando SPL (Standard PHP Library). Traduciendo nuestro ejemplo de estaciones de radio desde arriba. Primero que nada tenemos `RadioStation`
 ```php
 class RadioStation
 {
@@ -1526,7 +1513,7 @@ class RadioStation
     }
 }
 ```
-Then we have our iterator
+Entonces tenemos nuestro iterador
 
 ```php
 use Countable;
@@ -1584,7 +1571,7 @@ class StationList implements Countable, Iterator
     }
 }
 ```
-And then it can be used as
+Y luego puede usarse como
 ```php
 $stationList = new StationList();
 
@@ -1601,22 +1588,21 @@ $stationList->removeStation(new RadioStation(89)); // Will remove station 89
 ```
 
 👽 Mediator
-========
+===========
 
 Ejemplo del mundo real
-> A general example would be when you talk to someone on your mobile phone, there is a network provider sitting between you and them and your conversation goes through it instead of being directly sent. In this case network provider is mediator.
+> Un ejemplo general sería cuando habla con alguien en su teléfono móvil, hay un proveedor de red sentado entre usted y ellos y su conversación pasa por él en lugar de ser enviado directamente. En este caso, el proveedor de la red es mediador.
 
 De forma sencilla
-> Mediator pattern adds a third party object (called mediator) to control the interaction between two objects (called colleagues). It helps reduce the coupling between the classes communicating with each other. Because now they don't need to have the knowledge of each other's implementation.
+> El patrón del mediador agrega un objeto de terceros (llamado mediador) para controlar la interacción entre dos objetos (llamados colegas). Ayuda a reducir el acoplamiento entre las clases que se comunican entre sí. Porque ahora no necesitan tener el conocimiento de la implementación del otro.
 
 Wikipedia dice
-> In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
+> En ingeniería de software, el patrón del mediador define un objeto que encapsula cómo interactúa un conjunto de objetos. Este patrón se considera un patrón de comportamiento debido a la forma en que puede alterar el comportamiento de ejecución del programa.
 
 **Código de ejemplo**
 
-Here is the simplest example of a chat room (i.e. mediator) with users (i.e. colleagues) sending messages to each other.
-
-First of all, we have the mediator i.e. the chat room
+Este es el ejemplo más simple de una sala de chat (es decir, un mediador) con usuarios (es decir, colegas) que se envían mensajes entre ellos.
+Antes que nada, tenemos el mediador, es decir, la sala de chat
 
 ```php
 interface ChatRoomMediator
@@ -1637,7 +1623,7 @@ class ChatRoom implements ChatRoomMediator
 }
 ```
 
-Then we have our users i.e. colleagues
+Entonces tenemos nuestros usuarios, es decir, colegas
 ```php
 class User {
     protected $name;
@@ -1657,7 +1643,7 @@ class User {
     }
 }
 ```
-And the usage
+Y el uso
 ```php
 $mediator = new ChatRoom();
 
@@ -1673,23 +1659,23 @@ $jane->send('Hey!');
 ```
 
 💾 Memento
--------
+----------
 Ejemplo del mundo real
-> Take the example of calculator (i.e. originator), where whenever you perform some calculation the last calculation is saved in memory (i.e. memento) so that you can get back to it and maybe get it restored using some action buttons (i.e. caretaker).
+> Tome el ejemplo de calculadora (es decir, originador), donde cada vez que realice algún cálculo, el último cálculo se guarda en la memoria (es decir, recuerdo) para poder volver y recuperarlo utilizando algunos botones de acción (es decir, cuidador).
 
 De forma sencilla
-> Memento pattern is about capturing and storing the current state of an object in a manner that it can be restored later on in a smooth manner.
+> El patrón Memento se trata de capturar y almacenar el estado actual de un objeto de una manera que se puede restaurar más tarde de una manera suave.
 
 Wikipedia dice
-> The memento pattern is a software design pattern that provides the ability to restore an object to its previous state (undo via rollback).
+> El patrón de recuerdo es un patrón de diseño de software que proporciona la capacidad de restaurar un objeto a su estado anterior (deshacer por revertir).
 
-Usually useful when you need to provide some sort of undo functionality.
+Por lo general, es útil cuando necesita proporcionar algún tipo de funcionalidad de deshacer.
 
 **Código de ejemplo**
 
-Lets take an example of text editor which keeps saving the state from time to time and that you can restore if you want.
+Tomemos un ejemplo de editor de texto que guarda el estado de vez en cuando y que puede restaurar si lo desea.
 
-First of all we have our memento object that will be able to hold the editor state
+En primer lugar, tenemos nuestro objeto de recuerdo que podrá mantener el estado del editor
 
 ```php
 class EditorMemento
@@ -1708,7 +1694,7 @@ class EditorMemento
 }
 ```
 
-Then we have our editor i.e. originator that is going to use memento object
+Entonces tenemos nuestro editor, es decir, el autor que va a usar el objeto de recuerdo
 
 ```php
 class Editor
@@ -1737,8 +1723,7 @@ class Editor
 }
 ```
 
-And then it can be used as
-
+Y luego puede usarse como
 ```php
 $editor = new Editor();
 
@@ -1764,17 +1749,17 @@ $editor->getContent(); // This is the first sentence. This is second.
 😎 Observer
 --------
 Ejemplo del mundo real
-> A good example would be the job seekers where they subscribe to some job posting site and they are notified whenever there is a matching job opportunity.   
+> Un buen ejemplo serían los buscadores de empleo donde se suscriben a algún sitio de publicación de trabajo y se les notifica cada vez que hay una oportunidad de trabajo coincidente.
 
 De forma sencilla
-> Defines a dependency between objects so that whenever an object changes its state, all its dependents are notified.
+> Define una dependencia entre objetos para que cada vez que un objeto cambie su estado, se notifiquen todos sus dependientes.
 
 Wikipedia dice
-> The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
+> El patrón Observer es un patrón de diseño de software en el que un objeto, llamado sujeto, mantiene una lista de sus dependientes, llamados observadores, y los notifica automáticamente sobre cualquier cambio de estado, generalmente llamando a uno de sus métodos.
 
 **Código de ejemplo**
 
-Translating our example from above. First of all we have job seekers that need to be notified for a job posting
+Traduciendo nuestro ejemplo de arriba En primer lugar, tenemos personas que buscan trabajo y que necesitan ser notificadas para un puesto de trabajo
 ```php
 class JobPost
 {
@@ -1807,7 +1792,7 @@ class JobSeeker implements Observer
     }
 }
 ```
-Then we have our job postings to which the job seekers will subscribe
+Luego tenemos nuestras ofertas de trabajo a las que los solicitantes de empleo se suscribirán
 ```php
 class JobPostings implements Observable
 {
@@ -1831,7 +1816,7 @@ class JobPostings implements Observable
     }
 }
 ```
-Then it can be used as
+Entonces se puede usar como
 ```php
 // Create subscribers
 $johnDoe = new JobSeeker('John Doe');
@@ -1851,19 +1836,19 @@ $jobPostings->addJob(new JobPost('Software Engineer'));
 ```
 
 🏃 Visitor
--------
+----------
 Ejemplo del mundo real
-> Consider someone visiting Dubai. They just need a way (i.e. visa) to enter Dubai. After arrival, they can come and visit any place in Dubai on their own without having to ask for permission or to do some leg work in order to visit any place here; just let them know of a place and they can visit it. Visitor pattern lets you do just that, it helps you add places to visit so that they can visit as much as they can without having to do any legwork.
+> Considere a alguien visitando Dubai. Solo necesitan una forma (es decir, una visa) para ingresar a Dubai. Después de su llegada, pueden venir y visitar cualquier lugar en Dubái por su cuenta sin tener que pedir permiso o hacer un trabajo de piernas para visitar cualquier lugar aquí; solo hágales saber de un lugar y pueden visitarlo. El patrón de visitante le permite hacer eso, le ayuda a agregar lugares para visitar, de modo que puedan visitar todo lo que puedan sin tener que hacer ningún trabajo preliminar.
 
 De forma sencilla
-> Visitor pattern lets you add further operations to objects without having to modify them.
+> Patrón de visitante le permite agregar operaciones adicionales a los objetos sin tener que modificarlos.
 
 Wikipedia dice
-> In object-oriented programming and software engineering, the visitor design pattern is a way of separating an algorithm from an object structure on which it operates. A practical result of this separation is the ability to add new operations to existing object structures without modifying those structures. It is one way to follow the open/closed principle.
+> En la programación orientada a objetos y la ingeniería de software, el patrón de diseño de visitante es una forma de separar un algoritmo de una estructura de objeto en la que opera. Un resultado práctico de esta separación es la capacidad de agregar nuevas operaciones a estructuras de objeto existentes sin modificar esas estructuras. Es una forma de seguir el principio abierto / cerrado.
 
 **Código de ejemplo**
 
-Let's take an example of a zoo simulation where we have several different kinds of animals and we have to make them Sound. Let's translate this using visitor pattern
+Tomemos el ejemplo de una simulación de zoológico donde tenemos diferentes tipos de animales y tenemos que hacerlos Sonar. Vamos a traducir esto usando un patrón de visitante
 
 ```php
 // Visitee
@@ -1880,7 +1865,7 @@ interface AnimalOperation
     public function visitDolphin(Dolphin $dolphin);
 }
 ```
-Then we have our implementations for the animals
+Entonces tenemos nuestras implementaciones para los animales
 ```php
 class Monkey implements Animal
 {
@@ -1921,7 +1906,7 @@ class Dolphin implements Animal
     }
 }
 ```
-Let's implement our visitor
+Implementemos a nuestro visitante
 ```php
 class Speak implements AnimalOperation
 {
@@ -1942,7 +1927,7 @@ class Speak implements AnimalOperation
 }
 ```
 
-And then it can be used as
+Y luego puede usarse como
 ```php
 $monkey = new Monkey();
 $lion = new Lion();
@@ -1954,7 +1939,7 @@ $monkey->accept($speak);    // Ooh oo aa aa!
 $lion->accept($speak);      // Roaaar!
 $dolphin->accept($speak);   // Tuut tutt tuutt!
 ```
-We could have done this simply by having an inheritance hierarchy for the animals but then we would have to modify the animals whenever we would have to add new actions to animals. But now we will not have to change them. For example, let's say we are asked to add the jump behavior to the animals, we can simply add that by creating a new visitor i.e.
+Podríamos haber hecho esto simplemente al tener una jerarquía de herencia para los animales, pero luego tendríamos que modificar los animales cada vez que tuviéramos que agregar nuevas acciones a los animales. Pero ahora no tendremos que cambiarlos. Por ejemplo, digamos que se nos pide que agreguemos el comportamiento de salto a los animales, simplemente podemos agregarlo creando un nuevo visitante, es decir,
 
 ```php
 class Jump implements AnimalOperation
@@ -1975,7 +1960,7 @@ class Jump implements AnimalOperation
     }
 }
 ```
-And for the usage
+Y su uso es el siguiente
 ```php
 $jump = new Jump();
 
@@ -1990,7 +1975,7 @@ $dolphin->accept($jump);   // Walked on water a little and disappeared
 ```
 
 💡 Strategy
---------
+-----------
 
 Ejemplo del mundo real
 > Consider the example of sorting, we implemented bubble sort but the data started to grow and bubble sort started getting very slow. In order to tackle this we implemented Quick sort. But now although the quick sort algorithm was doing better for large datasets, it was very slow for smaller datasets. In order to handle this we implemented a strategy where for small datasets, bubble sort will be used and for larger, quick sort.
