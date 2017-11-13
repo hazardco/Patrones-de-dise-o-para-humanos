@@ -1205,7 +1205,8 @@ class LabDoor implements Door
     }
 }
 ```
-Entonces tenemos un proxy para asegurar las puertas que queremos```php
+Entonces tenemos un proxy para asegurar las puertas que queremos
+```php
 class Security
 {
     protected $door;
@@ -1978,18 +1979,17 @@ $dolphin->accept($jump);   // Walked on water a little and disappeared
 -----------
 
 Ejemplo del mundo real
-> Consider the example of sorting, we implemented bubble sort but the data started to grow and bubble sort started getting very slow. In order to tackle this we implemented Quick sort. But now although the quick sort algorithm was doing better for large datasets, it was very slow for smaller datasets. In order to handle this we implemented a strategy where for small datasets, bubble sort will be used and for larger, quick sort.
+> Vamos a cosiderar el método de ordanación de la burbuja como ejemplo. Al implementar el ordenamiento de burbuja, los datos pueden comenzar a crecer y el ordenamiento se puede hacer muy lento. Para hacer frente a esto, implementamos la ordenación rápida. Pero ahora, aunque el algoritmo de ordenación rápida funcionaba mejor para grandes conjuntos de datos, es muy lento para conjuntos de datos más pequeños. Con el fin de manejar esto, implementamos una estrategia donde para conjuntos de datos pequeños, se usará sort de burbuja y para ordenación más grande y rápida.
 
 De forma sencilla
-> Strategy pattern allows you to switch the algorithm or strategy based upon the situation.
+> El patrón Strategy le permite cambiar el algoritmo o la estrategia según la situación.
 
 Wikipedia dice
-> In computer programming, the strategy pattern (also known as the policy pattern) is a behavioural software design pattern that enables an algorithm's behavior to be selected at runtime.
+> En la programación de computadoras, el patrón Strategy (también conocido como patrón de política) es un patrón de diseño de software conductual que permite seleccionar el comportamiento de un algoritmo en tiempo de ejecución.
 
 **Código de ejemplo**
 
-Translating our example from above. First of all we have our strategy interface and different strategy implementations
-
+Traduciendo nuestro ejemplo de arriba. En primer lugar, tenemos nuestra interfaz de estrategia y diferentes implementaciones de estrategia
 ```php
 interface SortStrategy
 {
@@ -2019,7 +2019,7 @@ class QuickSortStrategy implements SortStrategy
 }
 ```
 
-And then we have our client that is going to use any strategy
+Y luego tenemos a nuestro cliente que va a usar cualquier estrategia
 ```php
 class Sorter
 {
@@ -2036,7 +2036,7 @@ class Sorter
     }
 }
 ```
-And it can be used as
+Y puede ser utilizado como
 ```php
 $dataset = [1, 5, 4, 3, 2, 8];
 
@@ -2048,23 +2048,20 @@ $sorter->sort($dataset); // Output : Sorting using quick sort
 ```
 
 💢 State
------
+--------
 Ejemplo del mundo real
-> Imagine you are using some drawing application, you choose the paint brush to draw. Now the brush changes its behavior based on the selected color i.e. if you have chosen red color it will draw in red, if blue then it will be in blue etc.  
+> Imagina que estás usando alguna aplicación de dibujo, escoges el pincel para dibujar. Ahora el pincel cambia su comportamiento en función del color seleccionado, es decir, si ha elegido el color rojo, dibujará en rojo, si es azul, en azul, etc.
 
 De forma sencilla
-> It lets you change the behavior of a class when the state changes.
-
+> Te permite cambiar el comportamiento de una clase cuando el estado cambia.
 Wikipedia dice
-> The state pattern is a behavioral software design pattern that implements a state machine in an object-oriented way. With the state pattern, a state machine is implemented by implementing each individual state as a derived class of the state pattern interface, and implementing state transitions by invoking methods defined by the pattern's superclass.
-> The state pattern can be interpreted as a strategy pattern which is able to switch the current strategy through invocations of methods defined in the pattern's interface.
+> El patrón State es un patrón de diseño de software de comportamiento que implementa una máquina de estado de una manera orientada a objetos. Con el patrón de estado, se implementa una máquina de estado implementando cada estado individual como una clase derivada de la interfaz de patrón de estado e implementando transiciones de estado invocando métodos definidos por la superclase del patrón.
+> El patrón State se puede interpretar como un patrón de estrategia que puede cambiar la estrategia actual a través de invocaciones de métodos definidos en la interfaz del patrón.
 
 **Código de ejemplo**
 
-Let's take an example of text editor, it lets you change the state of text that is typed i.e. if you have selected bold, it starts writing in bold, if italic then in italics etc.
-
-First of all we have our state interface and some state implementations
-
+Tomemos un ejemplo de editor de texto, le permite cambiar el estado del texto que se escribe, es decir, si ha seleccionado negrita, comienza a escribir en negrita, en cursiva, en cursiva, etc.
+En primer lugar, tenemos nuestra interfaz de estado y algunas implementaciones de estado
 ```php
 interface WritingState
 {
@@ -2095,7 +2092,7 @@ class Default implements WritingState
     }
 }
 ```
-Then we have our editor
+Entonces tenemos nuestro editor
 ```php
 class TextEditor
 {
@@ -2117,7 +2114,7 @@ class TextEditor
     }
 }
 ```
-And then it can be used as
+Y se puede utilizar de la siguiente forma
 ```php
 $editor = new TextEditor(new Default());
 
@@ -2142,28 +2139,28 @@ $editor->type('Fifth line');
 ```
 
 📒 Template Method
----------------
+------------------
 
 Ejemplo del mundo real
-> Suppose we are getting some house built. The steps for building might look like
-> - Prepare the base of house
-> - Build the walls
-> - Add roof
-> - Add other floors
+> Supongamos que estamos construyendo una casa. Los pasos para construir podrían parecerse
+> - Preparar la base de la casa
+> - Construye las paredes
+> - Agregar techo
+> - Agregar otros pisos
 
-> The order of these steps could never be changed i.e. you can't build the roof before building the walls etc but each of the steps could be modified for example walls can be made of wood or polyester or stone.
+> El orden de estos pasos nunca se puede cambiar, es decir, no se puede construir el techo antes de construir las paredes, etc., pero cada uno de los pasos se puede modificar, por ejemplo, las paredes pueden ser de madera o poliéster o piedra.
 
 De forma sencilla
-> Template method defines the skeleton of how a certain algorithm could be performed, but defers the implementation of those steps to the children classes.
+> El método de plantilla define el esqueleto de cómo se podría realizar cierto algoritmo, pero difiere la implementación de esos pasos a las clases de niños.
 
 Wikipedia dice
-> In software engineering, the template method pattern is a behavioral design pattern that defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. It lets one redefine certain steps of an algorithm without changing the algorithm's structure.
+> En ingeniería de software, el patrón Template Method es un patrón de diseño de comportamiento que define el esqueleto del programa de un algoritmo en una operación, difiriendo algunos pasos a subclases. Le permite a uno redefinir ciertos pasos de un algoritmo sin cambiar la estructura del algoritmo.
 
 **Código de ejemplo**
 
-Imagine we have a build tool that helps us test, lint, build, generate build reports (i.e. code coverage reports, linting report etc) and deploy our app on the test server.
+Imagine que tenemos una herramienta de compilación que nos ayuda a probar, crear pelusas, generar, generar informes de compilación (es decir, informes de cobertura de código, informe de borrado, etc.) y desplegar nuestra aplicación en el servidor de prueba.
 
-First of all we have our base class that specifies the skeleton for the build algorithm
+En primer lugar, tenemos nuestra clase base que especifica el esqueleto para el algoritmo de compilación
 ```php
 abstract class Builder
 {
@@ -2184,8 +2181,7 @@ abstract class Builder
 }
 ```
 
-Then we can have our implementations
-
+Entonces podemos tener nuestras implementaciones
 ```php
 class AndroidBuilder extends Builder
 {
@@ -2233,8 +2229,7 @@ class IosBuilder extends Builder
     }
 }
 ```
-And then it can be used as
-
+Y se puede utilizar de la siguiente forma
 ```php
 $androidBuilder = new AndroidBuilder();
 $androidBuilder->build();
@@ -2255,16 +2250,16 @@ $iosBuilder->build();
 // Deploying ios build to server
 ```
 
-## 🚦 Wrap Up Folks
+## 🚦 Conclusiones
 
-And that about wraps it up. I will continue to improve this, so you might want to watch/star this repository to revisit. Also, I have plans on writing the same about the architectural patterns, stay tuned for it.
+Esto ha sido todo. Continuaré mejorando, por lo que es posible que desee marcar este repositorio para volver a visitar. Además, tengo planes para escribir lo mismo sobre los patrones arquitectónicos, estad atentos.
 
 ## 👬 Contribution
 
-- Report issues
-- Open pull request with improvements
-- Spread the word
-- Reach out with any feedback [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/kamranahmedse.svg?style=social&label=Follow%20%40kamranahmedse)](https://twitter.com/kamranahmedse)
+- Informar problemas
+- Solicitud de extracción abierta con mejoras
+- Difundir la palabra
+- Póngase en contacto con cualquier comentario [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/kamranahmedse.svg?style=social&label=Follow%20%40kamranahmedse)](https://twitter.com/kamranahmedse)
 
 ## License
 
